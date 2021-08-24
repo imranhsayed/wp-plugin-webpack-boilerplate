@@ -1,0 +1,16 @@
+{
+	"apiVersion": 2,
+	"name": "gutenberg-block-stater/test-block",
+	"title": "Test Block",
+	"category": "text",
+	"icon": "star-filled",
+	"description": "Test Block With Some Text",
+	"keywords": [ "text", "message" ],
+	"version": "1.0.3",
+	"textdomain": "gutenberg-blocks-starter",
+	"supports": {
+		"align": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./index.css"
+}

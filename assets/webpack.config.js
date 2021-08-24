@@ -1,13 +1,16 @@
 const path = require( 'path' );
+const glob = require( 'glob' );
 
 /**
  * Plugins
  */
 const MiniCssExtractPlugin = require( 'mini-css-extract-plugin' );
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin'); // https://webpack.js.org/plugins/copy-webpack-plugin/
+const DependencyExtractionWebpackPlugin = require( '@wordpress/dependency-extraction-webpack-plugin' );
 
-// JS Directory path.
-const JSDir = path.resolve( __dirname, 'src/blocks' );
+// Directory paths.
+const JSDir = path.resolve( __dirname, 'src' );
 const IMG_DIR = path.resolve( __dirname, 'src/images' );
 const FONTS_DIR = path.resolve( __dirname, 'src/fonts' );
 const BUILD_DIR = path.resolve( __dirname, 'build' );
@@ -17,9 +20,37 @@ const entry = {
 	main: path.resolve( __dirname, 'src/main.js' ),
 };
 
+const entries = glob.sync( 'src/blocks/**/index.js' );
+const blockJSONEntries = glob.sync( 'src/blocks/**/block.json' );
+const copyFilePattern = [];
+
+if ( entries.length ) {
+	entries.forEach( file => {
+		const fileName = file.replace( '/index.js', '' ).replace( 'src/blocks/', '' );
+		
+		if ( fileName ) {
+			entry[ fileName ] = path.resolve( __dirname, file );
+		}
+	} )
+}
+
+// Push block json files.
+if ( blockJSONEntries.length ) {
+	
+	blockJSONEntries.forEach( file => {
+		const fileName = file.replace( '/block.json', '' ).replace( 'src/blocks/', '' );
+		if ( fileName ) {
+			copyFilePattern.push({
+				from: path.resolve( __dirname, `src/blocks/${fileName}/block.json` ),
+				to: path.resolve( __dirname, `build/${fileName}/block.json` ),
+			})
+		}
+	} );
+}
+
 const output = {
 	path: BUILD_DIR,
-	filename: 'js/[name].js'
+	filename: '[name]/index.js'
 };
 
 /**
@@ -28,7 +59,16 @@ const output = {
 const plugins = ( argv ) => [
 	
 	new MiniCssExtractPlugin( {
-		filename: 'blocks/[name]/index.css'
+		filename: '[name]/index.css'
+	} ),
+	
+	new CopyPlugin({
+		patterns: copyFilePattern
+	}),
+	
+	new DependencyExtractionWebpackPlugin( {
+		injectPolyfill: true,
+		combineAssets: false,
 	} ),
 ];
 
