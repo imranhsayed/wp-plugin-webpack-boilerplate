@@ -20,3 +20,4 @@ define( 'GUTENBERG_BLOCK_STARTER_BUILD_DIR', untrailingslashit( plugin_dir_path(
 define( 'GUTENBERG_BLOCK_STARTER_TEMPLATE_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) . '/templates/' );
 
 require_once GUTENBERG_BLOCK_STARTER_PATH . '/inc/register-blocks.php';
+require_once GUTENBERG_BLOCK_STARTER_PATH . '/inc/register-block-patterns.php';

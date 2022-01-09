@@ -2,15 +2,88 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/blocks/test-block/index.scss":
+/***/ "./src/blocks/dos-and-donts/edit.js":
 /*!******************************************!*\
-  !*** ./src/blocks/test-block/index.scss ***!
+  !*** ./src/blocks/dos-and-donts/edit.js ***!
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _templates__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templates */ "./src/blocks/dos-and-donts/templates.js");
 
+
+var INNER_BLOCKS_TEMPLATE = [['core/group', {
+  className: 'dos-and-donts-group'
+}, _templates__WEBPACK_IMPORTED_MODULE_1__.blockColumns]];
+/**
+ * Group -> Columns -> Col1( heading + List ) + Col2 ( heading + List )
+ *
+ *
+ * @return {JSX.Element}
+ * @constructor
+ */
+
+var Edit = function Edit() {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "dos-and-donts"
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.InnerBlocks, {
+    template: INNER_BLOCKS_TEMPLATE,
+    templateLock: true
+  }));
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Edit);
+
+/***/ }),
+
+/***/ "./src/blocks/dos-and-donts/templates.js":
+/*!***********************************************!*\
+  !*** ./src/blocks/dos-and-donts/templates.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "blockColumns": () => (/* binding */ blockColumns)
+/* harmony export */ });
+/**
+ *  Get Block Column.
+ *
+ * @param {String} colClassName ClassName
+ * @param {String} heading Heading
+ * @return {Array} Block column.
+ */
+var getBlockColumn = function getBlockColumn(colClassName, heading) {
+  return ['core/column', {
+    className: colClassName
+  }, [['core/heading', {
+    className: 'dos-and-donts__heading',
+    content: "<strong><span>".concat(heading, "</span></strong>")
+  }], ['core/list', {
+    className: 'dos-and-donts__list'
+  }], ['core/buttons', {
+    className: 'dos-and-donts__button'
+  }]]];
+};
+
+var blockColumns = [['core/columns', {
+  className: 'dos-and-donts__cols'
+}, [getBlockColumn('dos-and-donts__col-one', 'Dos'), getBlockColumn('dos-and-donts__col-two', "Dont's")]]];
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
 
 /***/ }),
 
@@ -95,41 +168,24 @@ module.exports = window["wp"]["blocks"];
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!****************************************!*\
-  !*** ./src/blocks/test-block/index.js ***!
-  \****************************************/
+/*!*******************************************!*\
+  !*** ./src/blocks/dos-and-donts/index.js ***!
+  \*******************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.scss */ "./src/blocks/test-block/index.scss");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/blocks/dos-and-donts/edit.js");
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('gutenberg-block-stater/test-block', {
-  icon: {
-    // Specifying a background color to appear with the icon e.g.: in the inserter.
-    background: '#7e70af',
-    // Specifying a color for the icon (optional: if not set, a readable color will be automatically defined)
-    foreground: '#fff',
-    // Specifying an icon for the block
-    src: /*#__PURE__*/React.createElement("svg", {
-      viewBox: "0 0 24 24",
-      xmlns: "http://www.w3.org/2000/svg"
-    }, /*#__PURE__*/React.createElement("path", {
-      fill: "none",
-      d: "M0 0h24v24H0V0z"
-    }), /*#__PURE__*/React.createElement("path", {
-      d: "M19 13H5v-2h14v2z"
-    }))
-  },
-  edit: function edit() {
-    return /*#__PURE__*/React.createElement("div", {
-      className: "test-block"
-    }, " Hello World ");
-  },
+
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)('gutenberg-block-stater/dos-and-donts', {
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__.default,
   save: function save() {
     return /*#__PURE__*/React.createElement("div", {
-      className: "test-block"
-    }, " Hello World ");
+      className: "dos-and-donts"
+    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null));
   }
 });
 })();
