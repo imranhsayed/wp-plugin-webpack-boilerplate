@@ -1,0 +1,16 @@
+{
+	"apiVersion": 2,
+	"name": "gutenberg-block-stater/dos-and-donts",
+	"title": "Dos and don'ts",
+	"category": "widgets",
+	"icon": "editor-table",
+	"description": "Dos and don'ts Block",
+	"keywords": [ "text", "comparison" ],
+	"version": "1.0.3",
+	"textdomain": "gutenberg-blocks-starter",
+	"supports": {
+		"align": true
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./index.css"
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"test-block/index.css","mappings":"AAAA;EACC,mBAAmB;EACnB,WAAW","sources":["webpack://gutenberg-blocks-boilerplate/./src/blocks/test-block/index.scss"],"sourcesContent":[".test-block {\n\tbackground: #0a4b78;\n\tcolor: #fff;\n}\n"],"names":[],"sourceRoot":""}
